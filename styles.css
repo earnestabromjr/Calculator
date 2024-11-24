@@ -6,6 +6,17 @@
   padding: 0;
 }
 
+@media screen and (max-width: 480px) {
+  .calculator {
+    min-width: 280px;    /* Slightly smaller on mobile */
+    min-height: 400px;
+  }
+
+  .calculator-button {
+    min-height: 50px;    /* Slightly smaller buttons on mobile */
+  }
+}
+
 body {
   font-family: Arial, sans-serif;
   line-height: 1.6;
@@ -19,16 +30,39 @@ main, footer {
 
 main {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  justify-content: center;
   align-items: center;
   padding: 2em;
 }
 
 section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   background-color: #fff;
   padding: 2em;
-  margin-bottom: 20px;
+  min-width: 300px;     /* Common width for most calculators */
+  min-height: 450px;    /* Good height for buttons and display */
+  max-width: 400px;     /* Prevents calculator from getting too wide */
+  /*padding: 20px;*/
+  /* Optional: center the calculator */
+  margin: 0 auto;
+  /*margin-bottom: 20px;*/
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.operations {
+display: flex;
+justify-content: space-evenly;
+}
+.digits {
+display: flex;
+flex-direction: row;
+}
+#sevenDigits, #fourDigits, #oneDigits  {
+  display: flex;
+  justify-content: space-evenly;
 }
 
 h1 {
@@ -37,6 +71,8 @@ h1 {
 }
 
 p {
+ color: black;
+  min-height: 80px;    /* Space for input and results */
   margin-bottom: 20px;
 }
 
