@@ -2,13 +2,14 @@
 
 // Component vars
 const calculator = document.getElementsByClassName('calculator');
-const textDisplay = document.getElementById("display");
+const textDisplay = document.querySelector('.calculator-display');
 const buttons= document.querySelector('.buttons')
 // textDisplay.innerText = "Calculator";
 // Calculator event listener
 
 // Update display
 buttons.addEventListener('click', (event) => {
+    textDisplay.classList.add('calculator-display');
     textDisplay.textContent += event.target.textContent;
 });
 
