@@ -2,16 +2,20 @@
 
 // Component vars
 const calculator = document.getElementsByClassName('calculator');
+
 const textDisplay = document.querySelector('.calculator-display');
+const displayTextArray = Array.from(textDisplay.textContent);
+displayTextArray.forEach((letter) => console.log(letter));
 const buttons= document.querySelector('.buttons')
+
+
+const mathOperators = ['+', '-', '*', '/']
+
 // textDisplay.innerText = "Calculator";
 // Calculator event listener
 
 // Update display
-buttons.addEventListener('click', (event) => {
-    textDisplay.classList.add('calculator-display');
-    textDisplay.textContent += event.target.textContent;
-});
+buttons.addEventListener('click', (event) => updateDisplay(event) );
 
 function add(num1, num2) {
     return num1 + num2;
@@ -46,4 +50,15 @@ function operate(num1, num2, operator) {
         default:
             throw new Error(`Invalid operator: ${operator}`);
     }
+}
+
+function clearText() {
+    textDisplay.textContent = "";
+}
+
+function updateDisplay(event) {
+    displayTextArray.push(textDisplay.textContent);
+    textDisplay.classList.add('calculator-display');
+    textDisplay.textContent += event.target.textContent;
+    return displayTextArray;
 }
