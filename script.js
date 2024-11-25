@@ -8,6 +8,8 @@ const displayTextArray = Array.from(textDisplay.textContent);
 displayTextArray.forEach((letter) => console.log(letter));
 const buttons= document.querySelector('.buttons')
 
+const numbers = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'];
+
 
 const mathOperators = ['+', '-', '*', '/']
 
@@ -56,9 +58,25 @@ function clearText() {
     textDisplay.textContent = "";
 }
 
-function updateDisplay(event) {
-    displayTextArray.push(textDisplay.textContent);
-    textDisplay.classList.add('calculator-display');
+// function updateDisplay(event) {
+//     displayTextArray.push(textDisplay.textContent);
+//     textDisplay.classList.add('calculator-display');
+//     textDisplay.textContent += event.target.textContent;
+//     return displayTextArray;
+// }
+
+function updateCalcDisplay (event) {
+    if (event.target.classList.contains('digits')) {
+        textDisplay.textContent += event.target.textContent;
+    } else if (event.target.classList.contains('operations')) {
+        textDisplay.textContent += event.target.textContent;
+    }
+}
+
+let displayText = "";
+if (event.target.textContent in numbers) {
     textDisplay.textContent += event.target.textContent;
-    return displayTextArray;
+    displayText.push(textDisplay.textContent);
+} else if (event.target.textContent in mathOperators) {
+    textDisplay.textContent += event.target.textContent;
 }
