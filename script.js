@@ -64,10 +64,13 @@ function operate(num1, num2, operator) {
             if (num2 !== 0) {
                 return divide(num1, num2);
             } else {
+                alert("Cannot divide by zero")
                 throw new Error("Cannot divide by zero");
             }
         default:
+            alert(`Invalid operator: ${operator}`)
             throw new Error(`Invalid operator: ${operator}`);
+
     }
 }
 
