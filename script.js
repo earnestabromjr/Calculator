@@ -1,46 +1,38 @@
 // Compute functions
 
 // Component vars
-const calculator = document.getElementsByClassName('calculator');
-
 const textDisplay = document.querySelector('.calculator-display');
-const displayTextArray = [];
-const buttons= document.querySelectorAll('.buttons')
+const buttons= document.querySelectorAll('.buttons');
 
-const numbers = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'];
-
-let firstNumber = "";
+let currentInput = "";
 let currentOperator = "";
-let secondNumber = "";
+let previousInput = "";
 
 const mathOperators = ['+', '-', '*', '/']
 
 // textDisplay.innerText = "Calculator";
 // Calculator event listener
-buttons.forEach(buttons => {
-    buttons.addEventListener('click')
-})
+buttons.forEach(button => {
+    button.addEventListener('click', () => {
+        const value = button.dataset.value;
 
-// Retrieve operands and operator
-buttons.addEventListener('click', (event) => {
-    mathOperators.forEach((sign) => {
-        if (event.target.textContent === sign) {
-            logValue(firstNumber);
-            currentOperator = sign;
+        if (value === 'C') {
+            clearText();
+        } else if (value === '=') {
+            currentInput = operate(previousInput, currentInput, currentOperator);
+            textDisplay.textContent = currentInput;
+            previousInput = '';
+            currentOperator = '';
+        } else if (mathOperators.includes(value)) {
+            currentOperator = value;
+            previousInput = currentInput;
+            currentInput = '';
+        } else {
+            currentInput += value;
+            textDisplay.textContent = currentInput;
         }
-    })
-})
-
-buttons.addEventListener('click', (event) => {
-    numbers.forEach((num) => {
-        if (textDisplay.textContent === ) {
-
-        }
-    })
-})
-
-// Update display
-buttons.addEventListener('click', (event) => updateDisplay(event) );
+    });
+});
 
 function add(num1, num2) {
     return num1 + num2;
@@ -59,6 +51,8 @@ function divide(num1, num2) {
 }
 
 function operate(num1, num2, operator) {
+    num1 = parseInt(num1);
+    num2 = parseInt(num2);
     switch (operator) {
         case '+':
             return add(num1, num2);
@@ -78,15 +72,8 @@ function operate(num1, num2, operator) {
 }
 
 function clearText() {
-    textDisplay.textContent = "";
-}
-
-function logValue(operand) {
-    operand = textDisplay.textContent
-    clearText()
-    console.log(operand);
-}
-
-function updateDisplay (event) {
-    textDisplay.textContent += event.target.textContent;
+    currentInput = '';
+    previousInput = '';
+    currentOperator = '';
+    textDisplay.textContent = '0';
 }
