@@ -4,17 +4,29 @@
 const calculator = document.getElementsByClassName('calculator');
 
 const textDisplay = document.querySelector('.calculator-display');
-const displayTextArray = Array.from(textDisplay.textContent);
-displayTextArray.forEach((letter) => console.log(letter));
+const displayTextArray = [];
 const buttons= document.querySelector('.buttons')
 
 const numbers = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'];
 
+let firstNumber = "";
+let currentOperator = null;
+let secondNumber = "";
 
 const mathOperators = ['+', '-', '*', '/']
 
 // textDisplay.innerText = "Calculator";
 // Calculator event listener
+
+
+// Retrieve operands and operator
+buttons.addEventListener('click', (event) => {
+    mathOperators.forEach((sign) => {
+        if (event.target.textContent === sign) {
+            logValue(firstNumber);
+        }
+    })
+})
 
 // Update display
 buttons.addEventListener('click', (event) => updateDisplay(event) );
@@ -58,25 +70,12 @@ function clearText() {
     textDisplay.textContent = "";
 }
 
-// function updateDisplay(event) {
-//     displayTextArray.push(textDisplay.textContent);
-//     textDisplay.classList.add('calculator-display');
-//     textDisplay.textContent += event.target.textContent;
-//     return displayTextArray;
-// }
-
-function updateCalcDisplay (event) {
-    if (event.target.classList.contains('digits')) {
-        textDisplay.textContent += event.target.textContent;
-    } else if (event.target.classList.contains('operations')) {
-        textDisplay.textContent += event.target.textContent;
-    }
+function logValue(operand) {
+    operand = textDisplay.textContent
+    clearText()
+    console.log(operand);
 }
 
-let displayText = "";
-if (event.target.textContent in numbers) {
-    textDisplay.textContent += event.target.textContent;
-    displayText.push(textDisplay.textContent);
-} else if (event.target.textContent in mathOperators) {
+function updateDisplay (event) {
     textDisplay.textContent += event.target.textContent;
 }
