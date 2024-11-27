@@ -5,25 +5,36 @@ const calculator = document.getElementsByClassName('calculator');
 
 const textDisplay = document.querySelector('.calculator-display');
 const displayTextArray = [];
-const buttons= document.querySelector('.buttons')
+const buttons= document.querySelectorAll('.buttons')
 
 const numbers = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'];
 
 let firstNumber = "";
-let currentOperator = null;
+let currentOperator = "";
 let secondNumber = "";
 
 const mathOperators = ['+', '-', '*', '/']
 
 // textDisplay.innerText = "Calculator";
 // Calculator event listener
-
+buttons.forEach(buttons => {
+    buttons.addEventListener('click')
+})
 
 // Retrieve operands and operator
 buttons.addEventListener('click', (event) => {
     mathOperators.forEach((sign) => {
         if (event.target.textContent === sign) {
             logValue(firstNumber);
+            currentOperator = sign;
+        }
+    })
+})
+
+buttons.addEventListener('click', (event) => {
+    numbers.forEach((num) => {
+        if (textDisplay.textContent === ) {
+
         }
     })
 })
