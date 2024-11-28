@@ -95,8 +95,16 @@ function clearText() {
 }
 
 function checkForSecondOperator() {
-    if (currentOperator) {
+    if (currentOperator !== "") {
         previousOperator = currentOperator;
-
+        return true;
     }
+    return false;
+}
+
+if (checkForSecondOperator() === true) {
+    currentInput = operate(previousInput, currentInput, previousOperator);
+    updateDisplay(currentInput);
+    previousInput = '';
+    previousOperator = '';
 }
