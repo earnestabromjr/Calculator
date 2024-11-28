@@ -6,7 +6,9 @@ const buttons= document.querySelectorAll('.buttons');
 
 let currentInput = "";
 let currentOperator = "";
+let previousOperator = "";
 let previousInput = "";
+let displayValue = '0';
 
 const mathOperators = ['+', '-', '*', '/']
 
@@ -18,18 +20,24 @@ buttons.forEach(button => {
 
         if (value === 'C') {
             clearText();
-        } else if (value === '=') {
+        }  else if (value === '=') {
             currentInput = operate(previousInput, currentInput, currentOperator);
-            textDisplay.textContent = currentInput;
+            updateDisplay(currentInput);
             previousInput = '';
             currentOperator = '';
+
+
         } else if (mathOperators.includes(value)) {
+           if (currentOperator && currentInput && previousInput) {
+               previousOperator = currentOperator;
+               currentOperator = value;
+           }
             currentOperator = value;
             previousInput = currentInput;
             currentInput = '';
         } else {
             currentInput += value;
-            textDisplay.textContent = currentInput;
+            updateDisplay(currentInput);
         }
     });
 });
@@ -74,9 +82,21 @@ function operate(num1, num2, operator) {
     }
 }
 
+function updateDisplay(dValue) {
+    textDisplay.innerText = dValue;
+}
+
 function clearText() {
     currentInput = '';
     previousInput = '';
     currentOperator = '';
+    previousOperator = '';
     textDisplay.textContent = '0';
+}
+
+function checkForSecondOperator() {
+    if (currentOperator) {
+        previousOperator = currentOperator;
+
+    }
 }
