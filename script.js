@@ -2,7 +2,7 @@
 
 // Component vars
 const textDisplay = document.querySelector('.calculator-display');
-const buttons= document.querySelectorAll('.buttons');
+const buttons = document.querySelectorAll('.buttons');
 
 let currentInput = "";
 let currentOperator = "";
@@ -20,18 +20,14 @@ buttons.forEach(button => {
 
         if (value === 'C') {
             clearText();
-        }  else if (value === '=') {
-            currentInput = operate(previousInput, currentInput, currentOperator);
+        } else if (checkForSecondOperator() === true) {
+            currentInput = operate(previousInput, currentInput, previousOperator);
             updateDisplay(currentInput);
             previousInput = '';
-            currentOperator = '';
-
-
+            previousOperator = '';
+        } else if (value === '=') {
+            calculateInputs();
         } else if (mathOperators.includes(value)) {
-           if (currentOperator && currentInput && previousInput) {
-               previousOperator = currentOperator;
-               currentOperator = value;
-           }
             currentOperator = value;
             previousInput = currentInput;
             currentInput = '';
@@ -102,9 +98,9 @@ function checkForSecondOperator() {
     return false;
 }
 
-if (checkForSecondOperator() === true) {
-    currentInput = operate(previousInput, currentInput, previousOperator);
+function calculateInputs() {
+    currentInput = operate(previousInput, currentInput, currentOperator);
     updateDisplay(currentInput);
     previousInput = '';
-    previousOperator = '';
+    currentOperator = '';
 }
