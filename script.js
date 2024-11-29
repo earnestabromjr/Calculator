@@ -24,9 +24,17 @@ buttons.forEach(button => {
             updateDisplay(currentInput);
         } else if (value === '=') {
             calculateInputs(currentOperator);
+        } else if (value === '.') {
+            if (currentInput === '') {
+                currentInput = '0';
+            }
+            if (!currentInput.includes('.')) {
+                currentInput += value;
+                updateDisplay(currentInput);
+            }
         } else if (mathOperators.includes(value)) {
             if (currentOperator){
-                currentInput = operate(previousInput, currentInput, currentOperator);
+                currentInput = operate(previousInput, currentInput, currentOperator).toString();
                 updateDisplay(currentInput);
                 previousInput = currentInput;
                 currentInput = '';
@@ -59,8 +67,8 @@ function divide(num1, num2) {
 }
 
 function operate(num1, num2, operator) {
-    num1 = parseInt(num1);
-    num2 = parseInt(num2);
+    num1 = parseFloat(num1);
+    num2 = parseFloat(num2);
     switch (operator) {
         case '+':
             return add(num1, num2);
