@@ -32,6 +32,7 @@ buttons.forEach(button => {
                 currentInput += value;
                 updateDisplay(currentInput);
             }
+
         } else if (mathOperators.includes(value)) {
             if (currentOperator){
                 currentInput = operate(previousInput, currentInput, currentOperator).toString();
