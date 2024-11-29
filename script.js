@@ -11,6 +11,7 @@ let previousInput = "";
 let displayValue = '0';
 
 const mathOperators = ['+', '-', '*', '/']
+updateDisplay(displayValue);
 
 // textDisplay.innerText = "Calculator";
 // Calculator event listener
@@ -20,17 +21,24 @@ buttons.forEach(button => {
 
         if (value === 'C') {
             clearText();
-        } else if (checkForSecondOperator() === true) {
-            currentInput = operate(previousInput, currentInput, previousOperator);
-            updateDisplay(currentInput);
-            previousInput = '';
-            previousOperator = '';
+        // } else if (checkForSecondOperator() === true) {
+        //     currentInput = operate(previousInput, currentInput, previousOperator);
+        //     updateDisplay(currentInput);
+        //     previousInput = '';
+        //     previousOperator = '';
         } else if (value === '=') {
-            calculateInputs();
+            calculateInputs(currentOperator);
         } else if (mathOperators.includes(value)) {
+            if (currentOperator){
+                currentInput = operate(previousInput, currentInput, currentOperator);
+                updateDisplay(currentInput);
+                previousInput = currentInput;
+                currentInput = '';
+            } else {
+                previousInput = currentInput;
+                currentInput = '';
+            }
             currentOperator = value;
-            previousInput = currentInput;
-            currentInput = '';
         } else {
             currentInput += value;
             updateDisplay(currentInput);
@@ -98,8 +106,8 @@ function checkForSecondOperator() {
     return false;
 }
 
-function calculateInputs() {
-    currentInput = operate(previousInput, currentInput, currentOperator);
+function calculateInputs(operator) {
+    currentInput = operate(previousInput, currentInput, operator);
     updateDisplay(currentInput);
     previousInput = '';
     currentOperator = '';
