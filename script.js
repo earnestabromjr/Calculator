@@ -6,7 +6,6 @@ const buttons = document.querySelectorAll('.buttons');
 
 let currentInput = "";
 let currentOperator = "";
-let previousOperator = "";
 let previousInput = "";
 let displayValue = '0';
 
@@ -21,11 +20,9 @@ buttons.forEach(button => {
 
         if (value === 'C') {
             clearText();
-        // } else if (checkForSecondOperator() === true) {
-        //     currentInput = operate(previousInput, currentInput, previousOperator);
-        //     updateDisplay(currentInput);
-        //     previousInput = '';
-        //     previousOperator = '';
+        } else if (value === 'backspace') {
+            currentInput = currentInput.slice(0, -1);
+            updateDisplay(currentInput);
         } else if (value === '=') {
             calculateInputs(currentOperator);
         } else if (mathOperators.includes(value)) {
@@ -94,19 +91,14 @@ function clearText() {
     currentInput = '';
     previousInput = '';
     currentOperator = '';
-    previousOperator = '';
-    textDisplay.textContent = '0';
-}
-
-function checkForSecondOperator() {
-    if (currentOperator !== "") {
-        previousOperator = currentOperator;
-        return true;
-    }
-    return false;
+    updateDisplay(displayValue);
 }
 
 function calculateInputs(operator) {
+    if (currentOperator === '') {
+        alert("Please enter an operator before calculating");
+        return;
+    }
     currentInput = operate(previousInput, currentInput, operator);
     updateDisplay(currentInput);
     previousInput = '';
