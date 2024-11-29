@@ -116,6 +116,10 @@ button {
     cursor: pointer;
 }
 
+button#decimal, button#equal {
+    background-color: orange;
+    color: black;
+}
 /*#backspace {*/
 /*    background-color: #333;*/
 /*    color: #fff;*/
