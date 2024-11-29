@@ -12,7 +12,6 @@ let displayValue = '0';
 const mathOperators = ['+', '-', '*', '/']
 updateDisplay(displayValue);
 
-// textDisplay.innerText = "Calculator";
 // Calculator event listener
 buttons.forEach(button => {
     button.addEventListener('click', () => {
